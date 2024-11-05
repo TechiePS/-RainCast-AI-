@@ -114,9 +114,9 @@ The model is saved using Pickle to avoid retraining every time the app is run. I
 
 
 ### OUTPUT
-![Alt text](D:\project\PG\SEM 3\rainfall\RainfallPredictionProject-Neural Network\OUTPUT\1.PNG)
-![Alt text](D:\project\PG\SEM 3\rainfall\RainfallPredictionProject-Neural Network\OUTPUT\2.PNG)
-![Alt text](D:\project\PG\SEM 3\rainfall\RainfallPredictionProject-Neural Network\OUTPUT\3.PNG)
+![Alt text](OUTPUT/1.PNG)
+![Alt text](OUTPUT/2.PNG)
+![Alt text](OUTPUT/3.PNG)
 
 
 ### ⚠️ Troubleshooting
