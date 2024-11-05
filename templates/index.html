@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainfall Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f4f8;
+        }
+
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #343a40;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-custom:hover {
+            background-color: #0069d9;
+        }
+
+        .alert-danger ul {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Rainfall Prediction</h1>
+            <form action="/predict" method="POST">
+                <div class="form-group">
+                    <label for="city_name">City Name:</label>
+                    <select class="form-control" id="city_name" name="city_name" required>
+                        <option value="" disabled selected>Select your city</option>
+                        <option value="" disabled selected>Select your city</option>
+                        <option value="Agra">Agra</option>
+                        <option value="Ahmedabad">Ahmedabad</option>
+                        <option value="Ahmednagar">Ahmednagar</option>
+                        <option value="Ajmer">Ajmer</option>
+                        <option value="Akola">Akola</option>
+                        <option value="Aligarh">Aligarh</option>
+                        <option value="Alwar">Alwar</option>
+                        <option value="Ambala">Ambala</option>
+                        <option value="Anantapur">Anantapur</option>
+                        <option value="Aurangabad">Aurangabad</option>
+                        <option value="Baddi">Baddi</option>
+                        <option value="Ballari">Ballari</option>
+                        <option value="Bareilly">Bareilly</option>
+                        <option value="Belgaum">Belgaum</option>
+                        <option value="Bhavnagar">Bhavnagar</option>
+                        <option value="Bhiwandi">Bhiwandi</option>
+                        <option value="Bhopal">Bhopal</option>
+                        <option value="Bhubaneswar">Bhubaneswar</option>
+                        <option value="Bikaner">Bikaner</option>
+                        <option value="Bilaspur">Bilaspur</option>
+                        <option value="Bokaro Steel City">Bokaro Steel City</option>
+                        <option value="Chhindwara">Chhindwara</option>
+                        <option value="Coimbatore">Coimbatore</option>
+                        <option value="Cuttack">Cuttack</option>
+                        <option value="Dehradun">Dehradun</option>
+                        <option value="Deoghar">Deoghar</option>
+                        <option value="Dhanbad">Dhanbad</option>
+                        <option value="Durg-Bhilai">Durg-Bhilai</option>
+                        <option value="Durgapur">Durgapur</option>
+                        <option value="Eluru">Eluru</option>
+                        <option value="Erode">Erode</option>
+                        <option value="Faridabad">Faridabad</option>
+                        <option value="Firozabad">Firozabad</option>
+                        <option value="Ghaziabad">Ghaziabad</option>
+                        <option value="Gorakhpur">Gorakhpur</option>
+                        <option value="Gulbarga">Gulbarga</option>
+                        <option value="Guntur">Guntur</option>
+                        <option value="Guwahati">Guwahati</option>
+                        <option value="Hamirpur">Hamirpur</option>
+                        <option value="Hubli-Dharwad">Hubli-Dharwad</option>
+                        <option value="Indore">Indore</option>
+                        <option value="Jabalpur">Jabalpur</option>
+                        <option value="Jaisalmer">Jaisalmer</option>
+                        <option value="Jalandhar">Jalandhar</option>
+                        <option value="Jamnagar">Jamnagar</option>
+                        <option value="Jamshedpur">Jamshedpur</option>
+                        <option value="Jhansi">Jhansi</option>
+                        <option value="Jodhpur">Jodhpur</option>
+                        <option value="Kakinada">Kakinada</option>
+                        <option value="Kalyan-Dombivli">Kalyan-Dombivli</option>
+                        <option value="Kannur">Kannur</option>
+                        <option value="Kanpur">Kanpur</option>
+                        <option value="Kota">Kota</option>
+                        <option value="Kochi">Kochi</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Kurukshetra">Kurukshetra</option>
+                        <option value="Lucknow">Lucknow</option>
+                        <option value="Ludhiana">Ludhiana</option>
+                        <option value="Madurai">Madurai</option>
+                        <option value="Mangaluru">Mangaluru</option>
+                        <option value="Meerut">Meerut</option>
+                        <option value="Nagpur">Nagpur</option>
+                        <option value="Nanded">Nanded</option>
+                        <option value="Nashik">Nashik</option>
+                        <option value="Noida">Noida</option>
+                        <option value="Patiala">Patiala</option>
+                        <option value="Pimpri-Chinchwad">Pimpri-Chinchwad</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Raipur">Raipur</option>
+                        <option value="Ranchi">Ranchi</option>
+                        <option value="Rajkot">Rajkot</option>
+                        <option value="Rourkela">Rourkela</option>
+                        <option value="Solapur">Solapur</option>
+                        <option value="Surat">Surat</option>
+                        <option value="Thane">Thane</option>
+                        <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                        <option value="Vadodara">Vadodara</option>
+                        <option value="Varanasi">Varanasi</option>
+                        <option value="Visakhapatnam">Visakhapatnam</option>
+                        <option value="Vasai-Virar">Vasai-Virar</option>
+                        <option value="Zirakpur">Zirakpur</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="year">Year:</label>
+                    <input type="number" class="form-control" id="year" name="year"
+                        placeholder="Enter year (e.g., 2024)" required>
+                </div>
+                <div class="form-group">
+                    <label for="month">Month:</label>
+                    <input type="number" class="form-control" id="month" name="month" placeholder="Enter month (1-12)"
+                        required min="1" max="12">
+                </div>
+                <div class="form-group">
+                    <label for="day">Day:</label>
+                    <input type="number" class="form-control" id="day" name="day" placeholder="Enter day (1-31)"
+                        required min="1" max="31">
+                </div>
+                <button type="submit" class="btn btn-custom btn-lg btn-block mt-4">Predict</button>
+            </form>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="alert alert-danger mt-4">
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
