@@ -9,7 +9,7 @@ import pickle
 import os
 
 # Load dataset
-data_path = r'D:\project\PG\SEM 3\rainfall\RainfallPredictionProject-Neural Network\combined_rainfall_data_2000_to_2023.csv'  # Update this path
+data_path = r'/content/combined_rainfall_data_2000_to_2023.csv'  # Update this path
 rainfall_data = pd.read_csv(data_path)
 
 # Check for NaN values
@@ -50,7 +50,7 @@ def train_and_save_model(city_name):
     # Adding lag features
     city_data['Lag1'] = city_data['Rainfall (mm)'].shift(1)
     city_data['Lag2'] = city_data['Rainfall (mm)'].shift(2)
-    city_data.dropna(inplace=True)  
+    city_data.dropna(inplace=True)
 
     X = city_data[['Year', 'Month', 'Day', 'Lag1', 'Lag2']]
     y = city_data['Rainfall (mm)']
@@ -84,23 +84,23 @@ def load_model(city_name):
     model_file = f'{city_name.lower()}_nn_model.pkl'
     if not os.path.exists(model_file):
         raise ValueError(f"Model for city '{city_name}' does not exist. Please train the model first.")
-    
+
     with open(model_file, 'rb') as f:
         model = pickle.load(f)
-    
+
     return model
 
 # Add this function to calculate percentage change
 def calculate_percentage_change(previous, current):
     if previous == 0:
-        return float('inf') 
+        return float('inf')
     return ((current - previous) / previous) * 100
 
 def predict_rainfall(model, year, month, day, last_rainfall):
     input_data = np.array([[year, month, day, last_rainfall, last_rainfall]])
     prediction = model.predict(input_data).flatten()[0]
     predicted_rainfall = scaler.inverse_transform(np.array([[prediction]]))[0][0]
-    
+
     # non-negative predicted rainfall
     predicted_rainfall = max(0, predicted_rainfall)
 
@@ -111,6 +111,26 @@ def predict_rainfall(model, year, month, day, last_rainfall):
 
 # Train the model for a specific city
 def prepare_model(city_name):
-    if not os.path.exists(f'{city_name.lower()}_nn_model.pkl'):
-        train_and_save_model(city_name)
+    # Check if data exists for the city before training
+    if city_name.lower() not in rainfall_data['City'].str.lower().unique():
+        raise ValueError(f"No data available for city '{city_name}'. Please check the city name.")
 
+    # If the model doesn't exist, train it
+    if not os.path.exists(f'{city_name.lower()}_nn_model.pkl'):
+        print(f"Training model for {city_name}...")
+        train_and_save_model(city_name)
+    else:
+        print(f"Model for {city_name} already exists. Skipping training.")
+
+# Main function to ask for city name and train the model
+def main():
+    # Ask for the city name
+    city_name = input("Enter the city name: ").strip()
+
+    # Prepare the model for the specified city
+    prepare_model(city_name)
+    print(f"Model for {city_name} is ready!")
+
+# Run the main function
+if __name__ == "__main__":
+    main()
